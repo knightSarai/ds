@@ -14,7 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@./.": ["src/index.ts"]
+      "@ds": ["src/index.ts"]
     },
     "types": ["vitest"]
   },
