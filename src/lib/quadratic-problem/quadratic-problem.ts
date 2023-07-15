@@ -12,3 +12,15 @@ export function hasDuplicateValue(array: number[]): boolean {
 
 }
 
+export function greatestNumber(array: number[]): number {
+  let greatest = array[0];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > greatest) {
+      greatest = array[i];
+    }
+  }
+
+  return greatest;
+
+}
+
