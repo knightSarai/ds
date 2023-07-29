@@ -15,7 +15,7 @@ But it might be the most efficient one!
 It also has complexity of O(N^2), but in real world it's a bit faster than bubble sort as it takes half of the steps that bubble sort takes
 
 ## Insertion Sort
-Iin the worst-case scenario, we compare and shift all the data, and in the best-case scenario, we shift none of the data (and just make one comparisonper pass-through).
+in the worst-case scenario, we compare and shift all the data, and in the best-case scenario, we shift none of the data (and just make one comparisonper pass-through).
 For the average scenario, we can say that in the aggregate, we probably compare and shift about half the data.
 Thus, if Insertion Sort takes N2 steps for the worst-case scenario, we’d say that it takes about N2 / 2 steps for the average scenario.
 (In terms of Big O, however, both scenarios are O(N2).)
