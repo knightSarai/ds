@@ -6,7 +6,9 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "rules": {
+        "no-constant-condition": ["error", { "checkLoops": false }]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
