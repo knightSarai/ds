@@ -54,5 +54,14 @@ export class SortableArray {
     // We return the leftPointer for the sake of the quicksort method
     return leftPointer;
   }
+
+  quicksort(leftIndex: number, rightIndex: number) {
+    if ((rightIndex - leftIndex) <= 0) return;
+
+    const pivotIndex = this.partition(leftIndex, rightIndex);
+
+    this.quicksort(leftIndex, pivotIndex - 1);
+    this.quicksort(pivotIndex + 1, rightIndex);
+  }
 }
 

@@ -29,3 +29,11 @@ In an average scenario, it takes N2 / 2 steps. And in the best-case scenario, it
                  Best Case Average Case  Worst Case
 Selection Sort    N^2 / 2     N^2 / 2       N^2 / 2
 Insertion Sort    N          N^2 / 2       N^2
+
+## Quick Sort
+Average Case O(N log N)
+Each time we partition the array, we end up breaking it down into two subarrays. Assuming the pivot ends up somewhere in the middle of the array wich is what happens in the average case.
+How many times can we break an array into halves until we’ve broken it completely down to the point of where each subarray is of size 1? For an array of size N, this will take us log N times.
+For an array of size 8, it takes us three “halvings” until we’ve reduced the array into eight individual elements. This is log N.
+So, this is why Quicksort takes N * log N steps. We have log N halvings, and for each halving, we perform a partition on all the subarrays whose elementsadd up to N. (They add up to N because all the subarrays are simply pieces of the original array of N elements.)
+In a worst-case scenario, Quicksort has an efficiency of O(N2).
