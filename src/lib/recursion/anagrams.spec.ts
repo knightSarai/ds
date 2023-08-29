@@ -1,4 +1,4 @@
-import {anagramsOf} from './angrams';
+import {anagramsOf} from './anagrams';
 
 test.each([
   {text: 'a', expected: ['a']},

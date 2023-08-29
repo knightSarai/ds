@@ -63,5 +63,26 @@ export class SortableArray {
     this.quicksort(leftIndex, pivotIndex - 1);
     this.quicksort(pivotIndex + 1, rightIndex);
   }
+
+  quickselect(kthLowestValue: number, leftIndex: number, rightIndex: number) {
+    if (rightIndex - leftIndex <= 0) {
+      return this.value[leftIndex];
+    }
+
+    const pivotIndex = this.partition(leftIndex, rightIndex);
+
+    if (kthLowestValue < pivotIndex) {
+      return this.quickselect(kthLowestValue, leftIndex, pivotIndex - 1)
+    }
+
+    if (kthLowestValue > pivotIndex) {
+      return this.quickselect(kthLowestValue, pivotIndex + 1, rightIndex)
+    }
+
+    if (kthLowestValue === pivotIndex) {
+      return this.value[pivotIndex] 
+    }
+
+  }
 }
 
