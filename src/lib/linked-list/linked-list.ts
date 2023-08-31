@@ -4,34 +4,30 @@ type Node<T> = {
 }
 
 export class SinglyLinkedList<T> {
-    private _head?: Node<T> = null;
-    public length = 0;
-
-    get head() {
-        return this._head;
-    }
+    head?: Node<T> = null;
+    length = 0;
 
     prepend(item: T): void {
         this.length++;
 
-        if(!this._head) {
-            this._head = {value: item, next: null}
+        if(!this.head) {
+            this.head = {value: item, next: null}
             return
         }
 
-        const currentHead = this._head;
-        this._head = {value: item, next: currentHead}
+        const currentHead = this.head;
+        this.head = {value: item, next: currentHead}
     }
 
     append(item: T): void {
         this.length++;
 
-        if(!this._head) {
-            this._head = {value: item, next: null};
+        if(!this.head) {
+            this.head = {value: item, next: null};
             return
         }
 
-        let current = this._head;
+        let current = this.head;
 
         while (current.next) {
             current = current.next
@@ -40,23 +36,111 @@ export class SinglyLinkedList<T> {
         current.next = {value: item, next: null};
     }
 
+    indexOf(item: T): number {
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        while(currentNode) {
+            if (currentNode.value === item) return currentIndex;
+            currentIndex++;
+            currentNode = currentNode.next
+        }
+
+        return -1
+
+    }
+
     insertAt(item: T, idx: number): void {
-        console.log
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        if (!currentNode) {
+            this.length++;
+            this.head = {value: item, next: null}
+            return
+        }
+
+        while(currentNode) {
+            if (currentIndex === idx - 1 || currentIndex === this.length - 1) {
+                this.length++;
+                currentNode.next = {value: item, next: currentNode.next}
+                break
+            }
+
+            currentIndex++;
+            currentNode = currentNode.next
+        }
     }
 
 
     remove(item: T): T | undefined {
-      return 
+        for (const node of this) {
+            if (node.value === item) {
+                return item
+            }
+        }
 
+        return 
     }
 
-    get(idx: number): T | undefined {
-      return 
+    getIndex(item: T): number {
+        let currentIndex = 0;
+        for (const node of this) {
+            if (node.value === item) {
+                return currentIndex;
+            }
+            currentIndex++
+        }
 
+        return -1
+    }
+
+    getAt(idx: number): T | undefined {
+        if (idx > this.length - 1) return
+
+        let currentIndex = 0;
+        for (const node of this) {
+            if (currentIndex === idx) return node.value
+            currentIndex++
+        }
     }
 
     removeAt(idx: number): T | undefined {
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        if (idx === 0) {
+            this.length--;
+            this.head = currentNode.next
+            return currentNode.value
+        }
+
+        while(currentNode) {
+            if (currentIndex === idx - 1) {
+                this.length--;
+                const temp = currentNode.next;
+                currentNode.next = temp.next;
+                return temp.value
+            }
+
+            currentIndex++;
+            currentNode = currentNode.next
+        }
+
       return
 
     }
+
+    *display() {
+        let currentNode = this.head;
+
+        while(currentNode) {
+            yield currentNode
+            currentNode = currentNode.next;
+        }
+    }
+
+    [Symbol.iterator]() {
+        return this.display()
+    } 
 }
