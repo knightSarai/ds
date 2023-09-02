@@ -133,6 +133,22 @@ export class SinglyLinkedList<T> {
 
     }
 
+    reverse(): void {
+        if (this.length < 2) return;
+
+        let currentNode = this.head;
+        let prevNode = null;
+
+        while (currentNode) {
+            const nextNode = currentNode.next;
+            currentNode.next = prevNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        this.head = prevNode;
+    }
+
     *display() {
         let currentNode = this.head;
 
@@ -175,4 +191,23 @@ export class DoublyLinkedList<T> {
         this.head = this.head.next;
         return temp.value
     }
+
+    reverse(): void {
+        if(this.length < 2) return;
+
+        let currentNode = this.head;
+        let prevNode = null;
+
+        while(currentNode) {
+            const nextNode = currentNode.next;
+            currentNode.next = prevNode;
+            currentNode.prev = nextNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        this.tail = this.head;
+        this.head = prevNode;
+    }
+
 }

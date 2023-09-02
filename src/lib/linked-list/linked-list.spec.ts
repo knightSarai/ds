@@ -143,6 +143,20 @@ describe('test singly linked list', () => {
 
         expect(list.getAt(1)).toEqual(3);
     })
+
+    it('should reverse the values in the linked list', () => {
+        const list = new SinglyLinkedList<number>();
+        list.append(1);
+        list.append(2);
+        list.append(3);
+        list.append(4);
+
+        list.reverse();
+
+        expect(list.head.value).toEqual(4);
+        expect(list.head.next.value).toEqual(3);
+        expect(list.head.next.next.next.value).toEqual(1);
+    })
 })
 
 describe('test singly linked list', () => {
@@ -178,5 +192,22 @@ describe('test singly linked list', () => {
         expect(list.head.value).toEqual(8);
         expect(list.head.next.value).toEqual(9);
         expect(list.head.next.next).toBeUndefined();
+    })
+
+    it('should reverse the values in the linked list', () => {
+        const list = new DoublyLinkedList<number>();
+        list.insertAtEnd(1);
+        list.insertAtEnd(2);
+        list.insertAtEnd(3);
+        list.insertAtEnd(4);
+
+        list.reverse();
+
+        expect(list.head.value).toEqual(4);
+        expect(list.head.next.value).toEqual(3);
+        expect(list.tail.value).toEqual(1);
+        expect(list.tail.next).toBeNull();
+        expect(list.tail.prev.value).toEqual(2);
+
     })
 })
