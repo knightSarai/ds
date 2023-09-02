@@ -1,4 +1,4 @@
-import { SinglyLinkedList } from './linked-list';
+import { SinglyLinkedList, DoublyLinkedList} from './linked-list';
 
 describe('test singly linked list', () => {
     it('should be initialised with empty head and 0 length', () => {
@@ -142,5 +142,41 @@ describe('test singly linked list', () => {
         list.append(7);
 
         expect(list.getAt(1)).toEqual(3);
+    })
+})
+
+describe('test singly linked list', () => {
+    it('should be initialised with empty head and 0 length', () => {
+        const list = new DoublyLinkedList<number>();
+        list.insertAtEnd(6);
+
+        expect(list.length).toEqual(1);
+        expect(list.head.value).toEqual(6)
+    })
+
+    it('should insert value at the end', () => {
+        const list = new DoublyLinkedList<number>();
+        list.insertAtEnd(6);
+        list.insertAtEnd(8);
+        list.insertAtEnd(9);
+
+        expect(list.length).toEqual(3);
+        expect(list.tail.prev.value).toEqual(8);
+        expect(list.tail.value).toEqual(9);
+        expect(list.tail.next).toBeUndefined();
+        expect(list.head.next).toEqual(list.tail.prev);
+    })
+
+    it('should remove value at the beginning', () => {
+        const list = new DoublyLinkedList<number>();
+        list.insertAtEnd(6);
+        list.insertAtEnd(8);
+        list.insertAtEnd(9);
+        list.removeAtFront();
+
+        expect(list.length).toEqual(2);
+        expect(list.head.value).toEqual(8);
+        expect(list.head.next.value).toEqual(9);
+        expect(list.head.next.next).toBeUndefined();
     })
 })

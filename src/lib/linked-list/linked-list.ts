@@ -1,10 +1,12 @@
 type Node<T> = {
     value: T;
-    next?: Node<T>
+    next?: Node<T>;
+    prev?: Node<T>
 }
 
+
 export class SinglyLinkedList<T> {
-    head?: Node<T> = null;
+    head?: Omit<Node<T>, 'prev'> = null;
     length = 0;
 
     prepend(item: T): void {
@@ -143,4 +145,34 @@ export class SinglyLinkedList<T> {
     [Symbol.iterator]() {
         return this.display()
     } 
+}
+
+
+export class DoublyLinkedList<T> {
+    head?: Node<T> = null;
+    tail?: Node<T> = null;
+    length = 0;
+
+    insertAtEnd(item: T): void {
+        this.length++
+        if (!this.head) {
+            this.head = this.tail = {value: item, next: null};
+            return
+        }
+
+        this.tail.next = {value: item}
+
+        const temp = this.tail;
+        this.tail = this.tail.next;
+        this.tail.prev = temp;
+    }
+
+    removeAtFront(): T | undefined {
+        if (!this.head) return
+
+        this.length--;
+        const temp = this.head;
+        this.head = this.head.next;
+        return temp.value
+    }
 }

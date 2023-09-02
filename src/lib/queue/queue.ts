@@ -1,3 +1,6 @@
+import { DoublyLinkedList } from '../linked-list/linked-list';
+
+
 type Node<T> = {
   value: T;
   next?: Node<T>;
@@ -53,4 +56,22 @@ export class Queue<T> {
   peek(): T | undefined {
     return this.head?.value
   }
+}
+
+
+export class QueueWithLinkedList<T> {
+    data = new DoublyLinkedList<T>();
+
+    enqueue(item: T): void {
+        this.data.insertAtEnd(item);
+    }
+
+    deque(): T | undefined {
+        return this.data.removeAtFront();
+
+    }
+
+    peek(): T | undefined {
+        return this.data.head?.value;
+    }
 }
