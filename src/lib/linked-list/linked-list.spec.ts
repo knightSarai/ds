@@ -211,3 +211,28 @@ describe('test singly linked list', () => {
 
     })
 })
+
+test('excercise delete node from the middle of the list with no access to the list itself', () => {
+    const list = new SinglyLinkedList<number>();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(4);
+    list.append(5);
+
+    const node = list.head.next.next;
+
+    // Solution
+    node.value = node.next.value;
+    node.next = node.next.next;
+
+
+    const arr = [];
+    for (const node of list) {
+        arr.push(node.value);
+    }
+
+    expect(arr).toStrictEqual([1, 2, 4, 5]);
+    expect(list.head.next.next.value).toEqual(4);
+
+})

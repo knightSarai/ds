@@ -74,17 +74,6 @@ export class SinglyLinkedList<T> {
         }
     }
 
-
-    remove(item: T): T | undefined {
-        for (const node of this) {
-            if (node.value === item) {
-                return item
-            }
-        }
-
-        return 
-    }
-
     getIndex(item: T): number {
         let currentIndex = 0;
         for (const node of this) {
