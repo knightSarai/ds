@@ -62,6 +62,10 @@ export class Queue<T> {
 export class QueueWithLinkedList<T> {
     data = new DoublyLinkedList<T>();
 
+    get length() {
+        return this.data.length;
+    }
+
     enqueue(item: T): void {
         this.data.insertAtEnd(item);
     }

@@ -212,7 +212,7 @@ describe('test singly linked list', () => {
     })
 })
 
-test('excercise delete node from the middle of the list with no access to the list itself', () => {
+test('exercise delete node from the middle of the list with no access to the list itself', () => {
     const list = new SinglyLinkedList<number>();
     list.append(1);
     list.append(2);
