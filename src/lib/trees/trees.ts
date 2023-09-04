@@ -89,8 +89,6 @@ export function compareTrees<T>(a: BinaryNode<T> | null, b: BinaryNode<T> | null
     }
 
     return compareTrees(a.left, b.left) && compareTrees(a.right, b.right);
-
-
 }
 
 
@@ -104,7 +102,7 @@ export function searchBinarySearchTree<T>(node: BinaryNode<T> | null, value: T) 
     }
 
 
-    if (node.value >= value) {
+    if (value <= node.value) {
         return searchBinarySearchTree(node.left, value);
     }
 
@@ -112,3 +110,72 @@ export function searchBinarySearchTree<T>(node: BinaryNode<T> | null, value: T) 
 }
 
 
+export function insertBinarySearchTree<T>(node: BinaryNode<T>, value: T):void {
+    if (value <= node.value) {
+        if (node.left === null) {
+            node.left = {
+                value,
+                left: null,
+                right: null
+            }
+        } else {
+            insertBinarySearchTree(node.left, value)
+        }
+    }
+
+    if (value > node.value) {
+        if (node.right === null) {
+            node.right = {
+                value,
+                left: null,
+                right: null
+            }
+        } else {
+            insertBinarySearchTree(node.right, value)
+        }
+    }
+}
+
+
+export function deleteBinarySearchTreeNode<T>(node: BinaryNode<T>, value: T): BinaryNode<T> | null {
+    if (node === null || node === undefined) {
+        return null;
+    }
+
+    if (value > node.value) {
+        node.right = deleteBinarySearchTreeNode(node.right, value);
+    }
+
+    if (value < node.value) {
+        node.left = deleteBinarySearchTreeNode(node.left, value);
+    }
+
+    if (value === node.value) {
+        if (node.left === null && node.right === null) {
+            return null;
+        }
+
+        if (node.left === null) {
+            return node.right
+        }
+
+        if (node.right === null) {
+            return node.left
+        }
+
+        node.right = left(node.right, node);
+    }
+
+    return node;
+}
+
+function left<T>(currentNode: BinaryNode<T>, nodeToDelete: BinaryNode<T>): BinaryNode<T> | null {
+    if (currentNode.left) {
+        currentNode.left = left(currentNode.left, nodeToDelete);
+        return currentNode
+    }
+
+    nodeToDelete.value = currentNode.value
+    return currentNode.right
+
+}

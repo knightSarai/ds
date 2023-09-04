@@ -1,4 +1,14 @@
-import { inOrderSearch, postOrderSearch, preOrderSearch, breadthFirstSearch, compareTrees, searchBinarySearchTree} from './trees';
+import { 
+    inOrderSearch,
+    postOrderSearch,
+    preOrderSearch,
+    breadthFirstSearch,
+    compareTrees,
+    searchBinarySearchTree,
+    insertBinarySearchTree,
+    deleteBinarySearchTreeNode
+} from './trees';
+
 
 const tree: BinaryNode<number> = {
     value: 20,
@@ -148,9 +158,133 @@ test('Compare trees', () => {
 })
 
 
-test.only('searchBinarySearchTree', () => {
+test('searchBinarySearchTree', () => {
     expect(searchBinarySearchTree(tree, 45)).toEqual(true);
     expect(searchBinarySearchTree(tree, 7)).toEqual(true);
     expect(searchBinarySearchTree(tree, 69)).toEqual(false);
 })
 
+
+test('insertBinarySearchTree', () => {
+    const testTree = JSON.parse(JSON.stringify(tree));
+
+    insertBinarySearchTree(testTree, 69);
+    expect(searchBinarySearchTree(testTree, 69)).toEqual(true);
+    expect(testTree.right.right.left.value).toEqual(69);
+})
+
+
+describe.only("Binary Search Tree Delete", () => {
+    it('should delete a node to the right if bigger than root and has no children', () => {
+        const testTree: BinaryNode<number> = {
+            value: 20,
+            right: {
+                value: 50,
+                right: null,
+                left: null,
+            },
+            left: null,
+        };
+
+        deleteBinarySearchTreeNode(testTree, 50);
+        expect(testTree.right).toEqual(null);
+    });
+
+    it("should delete a node the left if less than root and has no children", () => {
+        const testTree: BinaryNode<number> = {
+            value: 20,
+            right: null,
+            left: {
+                value: 10,
+                right: null,
+                left: null,
+            },
+        };
+
+        deleteBinarySearchTreeNode(testTree, 10);
+        expect(testTree.left).toEqual(null);
+    })
+
+    it("should plug the child of the deleted node into the parent if the deleted node has one child", () => {
+        const testTree: BinaryNode<number> = {
+            value: 20,
+            right: {
+                value: 50,
+                right: {
+                    value: 100,
+                    right: null,
+                    left: null,
+                },
+                left: null,
+            },
+            left: {
+                value: 10,
+                right: null,
+                left: {
+                    value: 5,
+                    right: null,
+                    left: null,
+                }
+            },
+        };
+
+        deleteBinarySearchTreeNode(testTree, 50);
+        deleteBinarySearchTreeNode(testTree, 10);
+
+        expect(testTree.right.value).toEqual(100);
+        expect(testTree.left.value).toEqual(5);
+    });
+
+    it('should replace the deleted node with the smallest node in the right subtree', () => {
+        const testTree: BinaryNode<number> = {
+            value: 20,
+            right: {
+                value: 50,
+                right: {
+                    value: 100,
+                    right: null,
+                    left: null,
+                },
+                left: {
+                    value: 30,
+                    right: null,
+                    left: null,
+                },
+            },
+            left: {
+                value: 10,
+                right: {
+                    value: 15,
+                    right: null,
+                    left: {
+                        value: 12,
+                        right: null,
+                        left: {
+                            value: 11,
+                            right: null,
+                            left: {
+                                value: 9,
+                                right: null,
+                                left: null,
+                            }
+                        },
+                    },
+                },
+                left: {
+                    value: 5,
+                    right: null,
+                    left: null,
+                }
+            },
+        };
+
+        deleteBinarySearchTreeNode(testTree, 50);
+        deleteBinarySearchTreeNode(testTree, 10);
+
+        expect(testTree.right.value).toEqual(100);
+        /* expect(testTree.right.right.value).toEqual(100); */
+        /**/
+        expect(testTree.left.value).toEqual(9);
+        /* expect(testTree.left.right.value).toEqual(15); */
+    })
+})
