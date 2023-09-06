@@ -25,3 +25,9 @@ When doing these traversals, we can use a stack to keep track of currently visit
 
 **Depth first traversales preserve the shape of the tree.**
 
+# Deleting Node rules
+1. If the node being deleted has no children, simply delete it.
+2. If the node being deleted has one child, delete the node and plug the childinto the spot where the deleted node was.
+3. When deleting a node with two children, replace the deleted node with the successor node. The successor node is the child node whose value is the least of all values that are greater than the deleted node.
+4. To find the successor node: visit the right child of the deleted value, and then keep on visiting the left child of each subsequent child until there are no more left children. The bottom value is the successor node.
+5. If the successor node has a right child, after plugging the successor node into the spot of the deleted node, take the former right child of the suc- cessor node and turn it into the left child of the former parent of the successor node.

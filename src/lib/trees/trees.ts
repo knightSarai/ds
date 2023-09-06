@@ -177,5 +177,14 @@ function left<T>(currentNode: BinaryNode<T>, nodeToDelete: BinaryNode<T>): Binar
 
     nodeToDelete.value = currentNode.value
     return currentNode.right
+}
+
+
+export function findTreeMaxValue<T>(currentNode: BinaryNode<T>): T {
+    if (currentNode.right) {
+        return findTreeMaxValue(currentNode.right)
+    }
+
+    return currentNode.value
 
 }

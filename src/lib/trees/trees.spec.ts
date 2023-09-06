@@ -6,7 +6,8 @@ import {
     compareTrees,
     searchBinarySearchTree,
     insertBinarySearchTree,
-    deleteBinarySearchTreeNode
+    deleteBinarySearchTreeNode,
+    findTreeMaxValue
 } from './trees';
 
 
@@ -174,7 +175,7 @@ test('insertBinarySearchTree', () => {
 })
 
 
-describe.only("Binary Search Tree Delete", () => {
+describe("Binary Search Tree Delete", () => {
     it('should delete a node to the right if bigger than root and has no children', () => {
         const testTree: BinaryNode<number> = {
             value: 20,
@@ -282,9 +283,11 @@ describe.only("Binary Search Tree Delete", () => {
         deleteBinarySearchTreeNode(testTree, 10);
 
         expect(testTree.right.value).toEqual(100);
-        /* expect(testTree.right.right.value).toEqual(100); */
-        /**/
         expect(testTree.left.value).toEqual(9);
-        /* expect(testTree.left.right.value).toEqual(15); */
     })
+})
+
+
+test('find tree max value', () => {
+    expect(findTreeMaxValue(tree)).toEqual(100);
 })
