@@ -32,7 +32,46 @@ export class Heap<T> {
             this.data[this.parentIndex(newNodeIndex)] = temp;
             newNodeIndex = this.parentIndex(newNodeIndex) 
         }
-
     }
+
+    delete(): T | undefined {
+        if (!this.data.length) {
+            return undefined
+        }
+
+        const deletedNode = this.data[0];
+
+        this.data[0] = this.data.pop();
+
+        let currentIndex = 0;
+
+        while(this.hasGreaterChild(currentIndex)) {
+            const largerChildIndex = this.getGreaterChildIndex(currentIndex);
+
+            const temp = this.data[currentIndex];
+            this.data[currentIndex] = this.data[largerChildIndex];
+            this.data[largerChildIndex] = temp
+
+            currentIndex = largerChildIndex;
+        }
+
+        return deletedNode
+    }
+
+    hasGreaterChild(index: number): boolean {
+        return (
+            (this.data[this.leftChildIndex(index)] && this.data[index] < this.data[this.leftChildIndex(index)]) ||
+            (this.data[this.rightChildIndex(index)]  && this.data[index] < this.data[this.rightChildIndex(index)])
+        )
+    }
+
+    getGreaterChildIndex(index: number): number {
+        if (!this.data[this.rightChildIndex(index)]) {
+            return this.leftChildIndex(index);
+        }
+
+        return this.data[this.rightChildIndex(index)] > this.data[this.leftChildIndex(index)] ? this.rightChildIndex(index) : this.leftChildIndex(index)
+    }
+
 
 }
