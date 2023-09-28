@@ -17,6 +17,19 @@ export class Vertex<T> {
     }
 }
 
+export class WeightedVertex<T> {
+    value: T;
+    adjacentVertices: Map<WeightedVertex<T> , number>= new Map();
+
+    constructor(value: T) {
+        this.value = value
+    }
+
+    add(vertex: WeightedVertex<T>, weight: number) {
+        this.adjacentVertices.set(vertex, weight);
+    }
+}
+
 
 export function dfsTraverse<T>(vertex: Vertex<T>, visited: Set<Vertex<T>> = new Set()): void {
     if (visited.has(vertex)) {
