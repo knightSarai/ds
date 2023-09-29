@@ -19,7 +19,7 @@ export class Vertex<T> {
 
 export class WeightedVertex<T> {
     value: T;
-    adjacentVertices: Map<WeightedVertex<T> , number>= new Map();
+    adjacentVertices: Map<WeightedVertex<T> , number> = new Map();
 
     constructor(value: T) {
         this.value = value
