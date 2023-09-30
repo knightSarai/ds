@@ -29,6 +29,7 @@ I'm continually expanding and refining the contents, but currently, the repo cov
 - [Tree](src/lib/tree/README.md)
 - [Trie](src/lib/trie/trie.ts)
 - [Graph](src/lib/graph/README.md)
+- [LRU Cache](src/lib/LRU/LRU.ts)
 - [Sorting](src/lib/sorting/README.md)
 - [Exercises](src/lib/exercises)
 
