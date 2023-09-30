@@ -1,3 +1,28 @@
+# Array
+
+When the computer reads a value at a particular index of an array, it can jump straight to that index because of the combination of the following facts about computers:
+1. A computer can jump to any memory address in one step.
+2. Whenever a computer allocates an array, it also makes note at which memory address the array begins. 
+   So, if we asked the computer to find the first element of the array, it would be able to instantly jump to the appropriate memory address to find it.
+3. A computer can also find the value at any index byperforming simple addition.
+
+
+# Array-based set
+
+It's the same as array but with one additional rule: No duplicate data are allowed!.
+So, Read, Search and deletion has the same time complexity as an array, but insertion is different.
+
+## Insertion
+
+In order to perform insertion task, a computor must perform two three tasks:
+1. Search for duplicate data.
+2. Shift data to make room for the new data.
+3. Insert the new data.
+
+Time complextiy: O(n) + O(n) + O(1) = O(n)
+
+# Dynamic Programming
+
 Recursion is often the culprit behind some of the slowest categories of Big O, such as O(2N). And Dynamic Programming is a technique that can be used to optimize these types of problems.
 
 let's take a recursive max function as an example:
@@ -164,3 +189,4 @@ function uniquePaths(rows, columns, memo = new Map()): number {
   return results;
 }
 ```
+
